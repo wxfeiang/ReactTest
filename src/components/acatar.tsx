@@ -11,7 +11,6 @@ export default function Avatar({ size }: AvatarProps) {
         {
             initialData: [], // 设置data状态的初始数据
             immediate: true, // 是否立即发送请求，默认为true
-
         }
     )
     if (loading) {
@@ -24,7 +23,7 @@ export default function Avatar({ size }: AvatarProps) {
     }
 
     return (
-        <div className='bg-[#1890ff]'>
+        <div className='bg-[#b42a2a]'>
             {
                 data?.map((item, index) => (
                     <div key={item.id} className='flex h-[50px] my-[20px]'>
