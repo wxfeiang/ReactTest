@@ -1,14 +1,20 @@
-
-import { Button } from 'antd';
-import Title from './components/title';
+import { Button } from "antd"
+import Artic from "./components/artic"
+import Testfef from "./components/testfef"
+import Title from "./components/title"
 
 function App() {
+  const tclick = () => {
+    console.log("tclick")
+  }
   return (
     <>
-      <Button type="primary">Primary Button</Button>
-      {/* <Artic></Artic> */}
+      <Testfef></Testfef>
+      <Button type="primary">
+        Primary Button
+      </Button>
+      <Artic></Artic>
       <Title></Title>
-
     </>
   )
 }
