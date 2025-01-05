@@ -1,3 +1,4 @@
+import VerifyCode from '@/hooks/VerifyCode';
 import {
     AlipayOutlined,
     FireFilled,
@@ -30,6 +31,10 @@ const iconStyles: CSSProperties = {
 const Page = () => {
     const [loginType, setLoginType] = useState<LoginType>('account');
     const { token } = theme.useToken();
+    const items = [
+        { label: '账户密码登录', key: 'account', },
+        { label: '手机号登录', key: 'phone', },
+    ];
     return (
         <div
             style={{
@@ -115,10 +120,10 @@ const Page = () => {
                 <Tabs
                     centered
                     activeKey={loginType}
+                    items={items}
                     onChange={(activeKey) => setLoginType(activeKey as LoginType)}
                 >
-                    <Tabs.TabPane key={'account'} tab={'账号密码登录'} />
-                    <Tabs.TabPane key={'phone'} tab={'手机号登录'} />
+
                 </Tabs>
                 {loginType === 'account' && (
                     <>
@@ -177,7 +182,9 @@ const Page = () => {
                                         className={'prefixIcon'}
                                     />
                                 ),
-                                suffix: "df"
+                                suffix: (
+                                    <VerifyCode />
+                                )
                             }}
 
                             placeholder={'请输入验证码!'}
