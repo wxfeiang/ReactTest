@@ -1,15 +1,18 @@
+import {
+  ContentTypeEnum,
+  ResultEnum
+} from "@/enums/httpEnum"
+import { checkStatus } from "@/utils/http/checkStatus"
+import { createAlova } from "alova"
+import adapterFetch from "alova/fetch"
+import ReactHook from "alova/react"
 
-import { ContentTypeEnum, ResultEnum } from '@/enums/httpEnum';
-import { checkStatus } from '@/utils/http/checkStatus';
-import { createAlova } from 'alova';
-import adapterFetch from 'alova/fetch';
-import ReactHook from 'alova/react';
-
-const timeOut = import.meta.env.VITE_SERVER_TIME_OUT
+const timeOut = import.meta.env
+  .VITE_SERVER_TIME_OUT
 
 const HEADER = {
-  'Content-Type': ContentTypeEnum.JSON,
-  Accept: 'application/json, text/plain, */*',
+  "Content-Type": ContentTypeEnum.JSON,
+  Accept: "application/json, text/plain, */*"
 }
 
 /**
@@ -37,7 +40,7 @@ export const alovaInstance = createAlova({
     //   token = userStore.getAuthorization()
     // }
     // method.config.headers = assign(method.config.headers, HEADER, token)
-    method.config.headers = { ...HEADER, }
+    method.config.headers = { ...HEADER }
   },
   responded: {
     /**
@@ -56,12 +59,14 @@ export const alovaInstance = createAlova({
 
       //const { enableDownload, enableUpload, responseType } = config as any
       // 返回所有结果
-      const { status: statusCode, data: rawData } = response as any
+      const {
+        status: statusCode,
+        data: rawData
+      } = response as any
       // const { msg, data, code } = rawData as any
 
-
       // 返回所有结果
-      if (statusCode === 200 && (meta?.resAll)) {
+      if (statusCode === 200 && meta?.resAll) {
         return response
       } else {
         if (statusCode === 200) {
@@ -74,21 +79,30 @@ export const alovaInstance = createAlova({
           //   return rawData
           // }
           // 返回不解析的数据 ()
-          const resAllData = await response.json() as any
+          const resAllData =
+            (await response.json()) as any
 
-          const { data: rdata, code: rode, message: rmsg } = resAllData
-          console.log(method.url + '====>🍯[解析后的数据]:', resAllData)
+          const {
+            data: rdata,
+            code: rode,
+            message: rmsg
+          } = resAllData
+          console.log(
+            method.url + "====>🍯[解析后的数据]:",
+            resAllData
+          )
           if (rode !== ResultEnum.CODE) {
             !meta?.Tips &&
               rmsg &&
-              checkStatus(statusCode, rmsg ?? '')
+              checkStatus(statusCode, rmsg ?? "")
             return Promise.reject(resAllData)
           } else {
-            return rdata as any
+            console.log("🍇", rdata)
+            return rdata
           }
         }
       }
-      !meta?.Tips && checkStatus(statusCode, '')
+      !meta?.Tips && checkStatus(statusCode, "")
       return Promise.reject(rawData)
       // return response.json()
     },
@@ -107,8 +121,8 @@ export const alovaInstance = createAlova({
       checkStatus(500)
       // eslint-disable-next-line prefer-promise-reject-errors
       return Promise.reject({ err, method })
-    },
-  },
+    }
+  }
 })
 
 export const request = alovaInstance
