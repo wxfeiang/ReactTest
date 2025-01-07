@@ -1,5 +1,6 @@
 import {
   ContentTypeEnum,
+  ResultData,
   ResultEnum
 } from "@/enums/httpEnum"
 import { checkStatus } from "@/utils/http/checkStatus"
@@ -86,7 +87,7 @@ export const alovaInstance = createAlova({
             data: rdata,
             code: rode,
             message: rmsg
-          } = resAllData
+          } = resAllData as ResultData
           console.log(
             method.url + "====>🍯[解析后的数据]:",
             resAllData
@@ -98,7 +99,7 @@ export const alovaInstance = createAlova({
             return Promise.reject(resAllData)
           } else {
             console.log("🍇", rdata)
-            return rdata
+            return rdata as ResultData
           }
         }
       }

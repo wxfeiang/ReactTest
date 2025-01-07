@@ -12,6 +12,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.5.2",
     "@ant-design/pro-components": "^2.8.2",
+    "ahooks": "^3.8.4",
     "alova": "^3.2.7",
     "antd": "^5.22.7",
     "oh-router": "^0.4.0",

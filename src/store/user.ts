@@ -1,33 +1,40 @@
-import { Login } from "@/api/system"
+import { getUserMenu, Login } from "@/api/system"
 import { router } from "@/router"
 import { loginParams, User } from "@/typings"
+import { setStorage } from "@/utils/storge"
+
 
 // import { resetPermissionRoutes } from "../router"
-import {
-  removeToken,
-  setToken
-} from "@/utils/token"
+
 
 export const userStore = new (class {
+  user: User | undefined = undefined
+  menu: any[] = []
+
   async login(data: loginParams) {
     try {
       const userInfo = await Login<User>(data)
-      setToken(userInfo.token)
+      this.user = userInfo
+      setStorage("userInfo", userInfo,)
       router.navigate("/")
     } catch (error) {
       throw error
     }
   }
 
-  user: any
 
-  async fetchUser() {
-    // this.user = await getUserInfo()
+
+
+  async getMenu() {
+    this.menu = await getUserMenu({
+      id: this.user!.id
+    })
+    console.log("🍾", this.menu)
     // resetPermissionRoutes(this.user)
   }
 
   logout() {
-    removeToken()
+    // removeToken()
     this.user = undefined
     // resetPermissionRoutes()
   }

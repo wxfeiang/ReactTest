@@ -20,7 +20,7 @@ const VerifyCode: React.FC<props> = (props) => {
         ...props
     }
     const { data, error, send } = useRequest(
-        request.Post<CordeProps>("/api/v1/base/captchaImage"),
+        request.Post<CordeProps>("/api/v1/base/captchaImage",),
         {
             initialData: [], // 设置data状态的初始数据
             immediate: true // 是否立即发送请求，默认为true
