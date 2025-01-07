@@ -81,13 +81,13 @@ export const alovaInstance = createAlova({
           // }
           // 返回不解析的数据 ()
           const resAllData =
-            (await response.json()) as any
+            (await response.json()) as ResultData
 
           const {
             data: rdata,
             code: rode,
             message: rmsg
-          } = resAllData as ResultData
+          } = resAllData
           console.log(
             method.url + "====>🍯[解析后的数据]:",
             resAllData
